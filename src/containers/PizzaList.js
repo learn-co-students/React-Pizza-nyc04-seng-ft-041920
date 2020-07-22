@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Pizza from '../components/Pizza'
+import {Consumer} from '../components/context'
+
 class PizzaList extends Component {
 
   render() {
@@ -14,9 +16,18 @@ class PizzaList extends Component {
           </tr>
         </thead>
         <tbody>
-          {
-            //render Pizza here
-          }
+          <Consumer>
+            {({pizzas}) => (
+              <React.Fragment>
+                {pizzas.map((pizza, index) =>
+                  <Pizza
+                    key={pizza.id.toString()}
+                    index={index}
+                  />
+                )}
+              </React.Fragment>
+            )}
+          </Consumer>
         </tbody>
       </table>
     );
